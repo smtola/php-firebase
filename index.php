@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +14,31 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    
     <div class="container mt-3">
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+        </nav>
+    
+        <div class="collapse" id="navbarToggleExternalContent">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./register.php">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./login.php" tabindex="-1" aria-disabled="true">Login</a>
+            </li>
+          </ul>
+        </div>
+        
         <?php
-            session_start();
             if(isset($_SESSION['status'])){
                 echo '<h4 class="alert alert-success">'.$_SESSION['status'].'</h4>';
                 unset($_SESSION['status']);
@@ -44,12 +69,21 @@
             <th scope="col">Name</th>
             <th scope="col">Gender</th>
             <th scope="col">Age</th>
+            <th scope="col" class="text-warning text-end">
+                <?php
+                    include "./includes/dbconfig.php";
+
+                    $ref = "testing/";
+                    $totalrow = $database->getReference($ref)->getSnapshot()->numChildren();
+                ?>
+                    Total No : <?php echo $totalrow?>
+            </th>
             <th></th>
             </tr>
         </thead>
         <tbody>
             <?php
-                include "./includes/dbconfig.php";
+                
                 $ref = 'testing/';
                 $fetchData = $database->getReference($ref)->getValue();
                 $i =0;
@@ -63,8 +97,12 @@
                 <td><?php echo $row['age'];?></td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn link-primary">Edit</button>
-                        <button class="btn link-danger">delete</button>
+                        <a href="edit.php?token=<?php echo $key;?>" class="btn link-primary">Edit</a>
+
+                        <form action="code.php" method="post">
+                            <input type="hidden" name="ref-take-delete" value="<?php echo $key;?>">
+                            <button name="delete-data" class="btn link-danger">delete</button>
+                        </form>
                     </div>
                 </td>        
             </tr>
