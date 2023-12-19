@@ -3,7 +3,7 @@
 use Firebase\Auth\Token\Exception\InvalidToken;
 
     session_start();
-    include './includes/dbconfig.php';
+    include '../includes/dbconfig.html';
     if(isset($_POST['onLogin'])){
         $email = $_POST['email'];
         $pass = $_POST['pwd'];
@@ -20,7 +20,7 @@ use Firebase\Auth\Token\Exception\InvalidToken;
                 $_SESSION['idTokenString'] = $idTokenString;
 
                 $_SESSION['status'] = "login success";
-                header("Location:./index.php");
+                header("Location:./index.html");
                 exit();
             } catch (InvalidToken $e) {
                 echo 'The token is invalid: '.$e->getMessage();
@@ -30,18 +30,18 @@ use Firebase\Auth\Token\Exception\InvalidToken;
 
            }catch(Exception $e){
             $_SESSION['status'] = 'Wrong password!';
-            header("location:./login.php");
+            header("location:./login.html");
             exit();
            }
         } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
             $_SESSION['status'] = 'Invalid username or password!';
-            header("location:./login.php");
+            header("location:./login.html");
             exit();
         }
     }else
     {
         $_SESSION = 'not allowed';
-        header("location:./login.php");
+        header("location:./login.html");
         exit();
     }
 ?>
