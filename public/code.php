@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../includes/dbconfig.html";
+    include "../includes/dbconfig.php";
 
     // register
         if(isset($_POST['onSave'])){
@@ -21,11 +21,11 @@
 
             if($createdUser){
                 $_SESSION['status'] = "User added successfully!";
-                header('location:register.html');
+                header('location:register.php');
                 exit();
             }else{
                 $_SESSION['status'] = "User Not added!";
-                header('location:register.html');
+                header('location:register.php');
                 exit();
             }
         }
@@ -47,10 +47,10 @@
 
         if($postRef){
             $_SESSION['status'] = "Data added successfully!";
-            header('location:index.html');
+            header('location:index.php');
         }else{
             $_SESSION['status'] = "Data Not added!";
-            header('location:index.html');
+            header('location:index.php');
         }
     }
 
@@ -72,10 +72,10 @@
         
         if($postRef_edit){
             $_SESSION['status'] = "Data update successfully!";
-            header('location:index.html');
+            header('location:index.php');
         }else{
             $_SESSION['status'] = "Data Not update!";
-            header('location:index.html');
+            header('location:index.php');
         }
     }
 
@@ -86,10 +86,10 @@
 
         if($ref_delete){
             $_SESSION['status'] = "Data Delete successfully!";
-            header('location:index.html');
+            header('location:index.php');
         }else{
             $_SESSION['status'] = "Data cannot delete!";
-            header('location:index.html');
+            header('location:index.php');
         }
     }
 ?>

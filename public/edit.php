@@ -20,12 +20,12 @@
             }
 
             $token = $_GET['token'];
-            include "../includes/dbconfig.html";
+            include "../includes/dbconfig.php";
 
             $ref = "testing/";
             $getData = $database->getReference($ref)->getChild($token)->getValue();
         ?>
-    <form action="./code.html" method="post">
+    <form action="./code.php" method="post">
         <input type="hidden" name="token" value="<?php echo $token?>">
         <div class="form-floating mb-3 mt-3">
         <input type="text" class="form-control" value="<?php echo $getData['name'];?>"  placeholder="Enter Name" name="name">
@@ -40,7 +40,7 @@
         <label for="age">Age</label>
         </div>
         <button type="submit" name="onEdit" class="btn btn-primary">Save</button>
-        <a type="button" href="index.html"  class="btn btn-danger">back</a>
+        <a type="button" href="index.php"  class="btn btn-danger">back</a>
     </form>
 </div>
 </body>
